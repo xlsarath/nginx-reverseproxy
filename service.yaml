@@ -2,12 +2,18 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    service: reverseproxy
-  name: reverseproxy-svc
+    app: my-app-2
+  name: my-app-2-svc
+  namespace: default
+  selfLink: /api/v1/namespaces/default/services/my-app-2-svc
 spec:
   ports:
-  - name: "8080"
-    port: 8080
+  - port: 8080
+    protocol: TCP
     targetPort: 8080
   selector:
-    service: reverseproxy
+    app: my-app-2
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

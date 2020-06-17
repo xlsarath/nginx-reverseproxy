@@ -1,33 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: my-app-2
   labels:
-    service: reverse-proxy
-  name: reverse-proxy
+    app: my-app-2
 spec:
   replicas: 1
   selector:
-   matchLabels:
-    app: reverse-proxy
+    matchLabels:
+      app: my-app-2
   template:
     metadata:
       labels:
-        app: reverse-proxy
-        service: reverse-proxy
+        app: my-app-2
     spec:
       containers:
-      - image: xlsarathchandra/simple-express
-        name: reverse-proxy
-        imagePullPolicy: Always          
-        resources:
-          requests:
-            memory: "64Mi"
-            cpu: "250m"
-          limits:
-            memory: "1024Mi"
-            cpu: "500m"       
+      - name: simple-express
+        image: xlsarathchandra/simple-express
         ports:
         - containerPort: 8080
-      restartPolicy: Always
-
-
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 3
+          periodSeconds: 3
