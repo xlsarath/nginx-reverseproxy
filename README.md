@@ -20,16 +20,22 @@ By default, the application should be loaded on `localhost:8080`. It should prov
 * service yaml : `kubectl apply -f service.yaml`
 * opening container : `kubectl exec -it my-app-2-svc bash`
 * access app on 8080: `root@my-app-2-6c47c56c9-dqn9k:/usr/src/app# curl http://my-app-2-svc:8080/health`
+* to access logs : `kubectl logs my-app-2-6c47c56c9-twn8l`
+* to delete serivce : `kubectl delete service my-app-2-6c47c56c9-twn8l`
+* to delete pod : `kubectl delete pod my-app-2-6c47c56c`
+* to delete deployment : `kubectl delete deployment.apps/my-app-2`
+
 
 # Container teardown
 * Remove container: `docker kill {container_id}` where `container_id` can be retrieved by running `docker ps` and found under the column `CONTAINER ID`
 
 # reverse proxy test
-# root@my-app-2-6c47c56c9-dqn9k:/usr/src/app# curl http://my-app-2-svc:8080/health
-# Hello!root@my-app-2-6c47c56c9-dqn9k:/usr/src/app# curl http://reverseproxy-svc:8080/api/health
+### root@my-app-2-6c47c56c9-dqn9k:/usr/src/app# curl http://my-app-2-svc:8080/health
+### Hello!root@my-app-2-6c47c56c9-dqn9k:/usr/src/app# curl http://reverseproxy-svc:8080/api/health
 
 # Extra commands
 * `kubectl get all`
 * `kubectl get pods`
 * `kubectl get service`
 * `kubectl describe services`
+* `kubectl describe pods pod-name`
